@@ -1,6 +1,6 @@
-// import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Container, Table} from 'react-bootstrap';
+import styled from 'styled-components';
 import TableBody from './components/TableBody';
 
 const tableTitle = [
@@ -13,29 +13,31 @@ const tableTitle = [
   "刪除",
 ]
 
+const Msg = styled.p`
+  margin-top: 150px
+`
+
 const ShopCart = () => {
-  // const [totalPrice, setTotalPrice] = useState(0);
+  const cartList = useSelector((state)=>state.cart);
 
-  // const handleTotalPrice = () => {
-
-  // }
-
-  // useEffect(()=>{
-  //   handleTotalPrice()
-  // },[totalPrice])
-  
   return (
       <Container>
         <Table striped bordered hover>
-          <thead>
-            <tr>
-            {tableTitle.map((title) => (
-              <th key={title}>{title}</th>
-            ))}
-            </tr>  
-          </thead>
-          <TableBody/>
-        </Table>
+          {cartList[0] ? 
+            <>
+              <thead>
+                <tr>
+                  {tableTitle.map((title) => (
+                    <th key={title}>{title}</th>
+                  ))}
+                </tr>  
+              </thead>
+              <TableBody cartList={cartList}/>
+            </>
+          :
+            <Msg className="fs-3 text-danger text-center">您尚未新增商品</Msg>
+          }
+          </Table>
       </Container>
   )
 };

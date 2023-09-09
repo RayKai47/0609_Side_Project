@@ -1,21 +1,19 @@
 import { Outlet,Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+// import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 // import styled from 'styled-components'
 import { ShoppingCart } from 'phosphor-react';
 
 const Header = () => {
 
-  // const ButtonSearch = styled(Button)`
-  //   .btn{
-  //     font-size: 12px;
-  //   }
-  // `
+  const cartList = useSelector((state)=>state.cart);
+  const totalNum = cartList.reduce((acc, good) => acc + good.itemNum, 0);
   return (
     <>
       <Navbar sticky="top" expand="sm" className="header_nav">
@@ -39,7 +37,6 @@ const Header = () => {
                 <Link className="nav-link" to="/category">Clothes</Link>
                 <Link className="nav-link" to="/category">Jeans</Link>
                 <Link className="nav-link" to="/category">Shoes</Link>
-                <Link className="nav-link" to="/shopItem">單品頁面</Link>
                 <Link className="nav-link" to="/shopCart">購物車</Link>
                 <Link className="nav-link" to="/shopCart2">購物車2</Link>
                 {/* <NavDropdown
@@ -70,7 +67,14 @@ const Header = () => {
       </Navbar>
       <div className="module">
         <Outlet/>
-        <Link className="cart-fix" path="/shopCart"><ShoppingCart size={32}/></Link>
+        <Link className="cart-fix" path="/shopCart">
+          <ShoppingCart size={32}/>
+          {cartList[0] ?
+            <span className="cart-num">{totalNum}</span>
+            :
+            null
+          }
+        </Link>
       </div>
     </>
   )

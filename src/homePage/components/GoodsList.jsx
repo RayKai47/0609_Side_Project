@@ -11,7 +11,7 @@ const GoodsList = () => {
         {goodsData.map((good) => (
           // 因為我把Goods裡面的props={good}，所以帶入的變數名要是good(前面的good)
           // 後面的good為map的參數
-          <Goods good={good}/>
+          <Goods good={good} key={good.name}/>
         ))}
       </Row>
     </Container>
