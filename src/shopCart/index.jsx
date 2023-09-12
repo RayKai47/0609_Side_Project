@@ -14,7 +14,8 @@ const tableTitle = [
 ]
 
 const Msg = styled.p`
-  margin-top: 150px
+  margin-top: 150px;
+  display: block;
 `
 
 const ShopCart = () => {
@@ -22,8 +23,8 @@ const ShopCart = () => {
 
   return (
       <Container>
-        <Table striped bordered hover>
-          {cartList[0] ? 
+        {cartList[0] ?
+          <Table striped bordered hover>
             <>
               <thead>
                 <tr>
@@ -34,10 +35,10 @@ const ShopCart = () => {
               </thead>
               <TableBody cartList={cartList}/>
             </>
-          :
-            <Msg className="fs-3 text-danger text-center">您尚未新增商品</Msg>
-          }
           </Table>
+        :
+          <Msg className="fs-3 text-danger text-center">您尚未新增商品</Msg>
+        }
       </Container>
   )
 };

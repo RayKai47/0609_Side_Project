@@ -38,7 +38,6 @@ const Header = () => {
                 <Link className="nav-link" to="/category">Jeans</Link>
                 <Link className="nav-link" to="/category">Shoes</Link>
                 <Link className="nav-link" to="/shopCart">購物車</Link>
-                <Link className="nav-link" to="/shopCart2">購物車2</Link>
                 {/* <NavDropdown
                   title="Dropdown"
                 >
@@ -67,7 +66,7 @@ const Header = () => {
       </Navbar>
       <div className="module">
         <Outlet/>
-        <Link className="cart-fix" path="/shopCart">
+        <Link className="cart-fix" to="/shopCart">
           <ShoppingCart size={32}/>
           {cartList[0] ?
             <span className="cart-num">{totalNum}</span>

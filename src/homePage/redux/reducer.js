@@ -21,16 +21,14 @@ export const cart = (state = initCart, action) => {
 const addOrder = (state, payload) => {
   let isRepeat = false
   state.forEach((good,idx)=>{
-    if(good.id === payload.itemData.id){
-      if(good.material === payload.material) {
-        isRepeat = true
-        console.log(payload.itemNum)
-        const tempObj = {
-          ...good,
-          itemNum:good.itemNum+payload.itemNum
-        }
-        state.splice(idx,1,tempObj)
+    if(good.id === payload.itemData.id && good.material === payload.material){
+      isRepeat = true
+      console.log(payload.itemNum)
+      const tempObj = {
+        ...good,
+        itemNum:good.itemNum+payload.itemNum
       }
+      state.splice(idx,1,tempObj)
     }
   })
   if(!isRepeat){
@@ -50,15 +48,32 @@ const addOrder = (state, payload) => {
 };
 
 const updateOrder = (state, payload) => {
-  state.forEach((good,idx) => {
-    if(good.id === payload.itemData.id){
-      if(good.material == payload.itemData.material){
-        const tempObj = {...good,itemNum:payload.itemData.itemNum}
-        state.splice(idx,1,tempObj)
+  // 助教的方法
+  // state.forEach((good,idx) => {
+  //   if(good.id === payload.itemData.id && good.material == payload.itemData.material){
+  //     if(payload.itemData.itemNum !== 0 ){
+  //       const tempObj = {...good,itemNum:payload.itemData.itemNum}
+  //       state.splice(idx,1,tempObj)
+  //     }
+  //   }
+  // })
+  // return [...state]
+  const updatedState = state.map((good) => {
+    const maxQuantity = 10;
+    if (good.id === payload.itemData.id && good.material === payload.itemData.material) {
+      const newQuantity = Math.min(Math.max(payload.itemData.itemNum, 0), maxQuantity);
+
+      if (newQuantity === 0) {
+        // 商品數量為 0，不返回這個商品，相當於刪除
+        return null;
       }
+      return { ...good, itemNum: newQuantity };
     }
-  })
-  return [...state]
+    return good;
+  });
+  const filteredState = updatedState.filter((good) => good !== null);
+
+  return filteredState;
 };
 
 const delOrder = (state,payload) => {

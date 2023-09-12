@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Form, InputGroup} from 'react-bootstrap';
 import styled from 'styled-components';
@@ -28,28 +28,43 @@ const TableBody = () => {
           ...good,
           itemNum:good.itemNum+count,
         }
-        
-      }})
+      }
+    })
   )
   const handleDel = (good) =>(
     dispatch ({ type:"DEL_ORDER", payload:good })
   )
   
+  const [selectGoodId, setSelectGoodId] = useState([]);
+  
+  const toggleSelected = (goodId) => {
+    if(selectGoodId.includes(goodId)){
+      setSelectGoodId.filter((id)=> id !== goodId)
+      console.log(selectGoodId)
+    } else {
+      setSelectGoodId([...selectGoodId, goodId])
+      console.log(selectGoodId)
+    }
+  }
+
   return (
     <tbody>
-      {cartList.map((good)=>(
-        <tr key={good.id}>
+      {cartList.map((good,idx)=>(
+        <tr key={idx}>
           <td>
             <Form.Group className="mb-3">
-              <Form.Check/>
+              <Form.Check
+                type="checkbox"
+                value={good.id}
+                onChange={()=> toggleSelected(good.id)}
+              />
             </Form.Group>
           </td>
           <td><GoodsImg src={require(`../../homePage/asset/${good.img}`)}/></td>
-          {/* <td><GoodsImg><img src={require(`../homePage/asset/${good.img}`)}/></GoodsImg></td> */}
-            <td>
-              {good.name}
-              {good.material ? <GoodsType className="text-secondary">樣式：{good.material}</GoodsType> : null}
-            </td>
+          <td>
+            {good.name}
+            {good.material ? <GoodsType className="text-secondary">樣式：{good.material}</GoodsType> : null}
+          </td>
           <td>
             <InputGroup className="mb-3">
               <Button variant="secondary" onClick={()=>handleUpdate(good,1)}>+</Button>
@@ -58,6 +73,11 @@ const TableBody = () => {
                 placeholder="商品數量"
                 aria-label="itemsCount"
                 value={good.itemNum}
+                onChange={(e)=> {
+                  const newValue = parseInt(e.target.value); // 將輸入轉換為數字
+                  if (!isNaN(newValue)) {
+                    handleUpdate(good, newValue - good.itemNum); // 計算差值並更新數量
+                  }}}
               />
               <Button variant="secondary" onClick={()=>handleUpdate(good,-1)}>-</Button>
             </InputGroup>
