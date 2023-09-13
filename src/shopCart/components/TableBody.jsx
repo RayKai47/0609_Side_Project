@@ -60,7 +60,7 @@ const TableBody = () => {
               />
             </Form.Group>
           </td>
-          <td><GoodsImg src={require(`../../homePage/asset/${good.img}`)}/></td>
+          <td><GoodsImg src={require(`../../infra/asset/${good.img}`)}/></td>
           <td>
             {good.name}
             {good.material ? <GoodsType className="text-secondary">樣式：{good.material}</GoodsType> : null}

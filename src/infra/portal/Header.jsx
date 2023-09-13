@@ -33,10 +33,10 @@ const Header = () => {
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 <Link className="nav-link" to="/">Home</Link>
-                <Link className="nav-link" to="/category">Suits</Link>
-                <Link className="nav-link" to="/category">Clothes</Link>
-                <Link className="nav-link" to="/category">Jeans</Link>
-                <Link className="nav-link" to="/category">Shoes</Link>
+                <Link className="nav-link" to="/category/suit">Suit</Link>
+                <Link className="nav-link" to="/category/tshirt">T-shirt</Link>
+                <Link className="nav-link" to="/category/jacket">Jacket</Link>
+                <Link className="nav-link" to="/category/jeans">Jeans</Link>
                 <Link className="nav-link" to="/shopCart">購物車</Link>
                 {/* <NavDropdown
                   title="Dropdown"

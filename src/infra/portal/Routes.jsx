@@ -11,7 +11,7 @@ const RoutesWarp = () => {
     <Routes>
       <Route path="/" element={<Header/>}>
         <Route path="/" element={<Home/>}/>
-        <Route path="/category" element={<Category/>}/>
+        <Route path="/category/:category" element={<Category/>}/>
         <Route path="/shopItem/:id" element={<ShopItem/>}/>
         <Route path="/shopCart" element={<ShopCart/>}/>
         <Route path="*" element={<NoMatch/>}/>

@@ -1,10 +1,10 @@
-import {React, useState, useEffect} from 'react';
+import {React, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Container, Row, Col, Button, Form, InputGroup } from 'react-bootstrap';
 import './css/shopItem.css';
 import {Heart} from 'phosphor-react';
-import goodsData from '../homePage/data/goodsData';
+import goodsData from '../infra/store/goodsData';
 
 const ShopItem = () => {
   const [itemNum, setItemNum] = useState(1);

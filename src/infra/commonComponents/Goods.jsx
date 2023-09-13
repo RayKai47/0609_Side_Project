@@ -1,12 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Col } from 'react-bootstrap';
 import { Heart } from 'phosphor-react';
 
 const Goods = (props) => {
   const {good} = props
   return (
-    <Col key={good.id}>
+    <Col>
       <Link to={`/shopItem/${good.id}`} className="text-light">
         <div className="shop_list-item">
           <img className="shop_list-item-img" src={require(`../asset/${good.img}`)} alt="" />
