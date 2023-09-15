@@ -11,7 +11,7 @@ const ShopItem = () => {
   const {id} = useParams();
   // 1.因為預設值是null,所以此值為空 (以換selectedGood用法)
   // const [selectGood, setSelectGood] = useState(null);
-  const selectedGood = goodsData.find(good => good.id == id);
+  const selectedGood = goodsData.find(good => good.id === id);
   // 3. useEffect在執行完第一次渲染之後，才會執行（抓到資料
   // 更動之後selectGood就會有值，再次渲染時則不為空了
   // useEffect(() => {
@@ -22,7 +22,7 @@ const ShopItem = () => {
   const [selectedType, setSelectedType] = useState(null);
 
   const handleSelected = (type) => {
-    if(selectedType == type){
+    if(selectedType === type){
       setSelectedType(null)
     } else {
       setSelectedType(type)
@@ -51,6 +51,7 @@ const ShopItem = () => {
         <Col md={6} className="shopItem_img">
           <img src={`/img/${selectedGood.img}`} alt=""/>
         </Col>
+
         <Col md={6} className="shopItem_content">
           <Row className="h-100">
             {/* 上標題與內文 */}
@@ -86,29 +87,21 @@ const ShopItem = () => {
               <Col xs={12} sm={6} md={4} className="shopItem_content_num">
                 <h6>數量：</h6>
                 <InputGroup size="sm" className="mt-3">
-                  {itemNum == 0 ? 
-                    <Button
-                      onClick={()=>setItemNum((num)=>num-1)}
-                      variant="secondary"
-                      id="button-addon2"
-                      disabled
-                    >
-                      -
-                    </Button>
+                  { itemNum === 1 ? 
+                    <Button variant="secondary" id="button-addon2" disabled>-</Button>
                   : 
-                    <Button
-                      onClick={()=>setItemNum((num)=>num-1)}
-                      variant="secondary"
-                      id="button-addon2"
-                    >-
-                    </Button>
+                    <Button variant="secondary" id="button-addon2" onClick={()=>setItemNum((num)=>num-1)}>-</Button>
                   }
                   <Form.Control
                     className="text-center"
                     value={itemNum}
                     onChange={(e)=>(setItemNum(e.target.value))}
                   />
-                  <Button onClick={()=>setItemNum((num)=>num+1)} variant="secondary" id="button-addon1">+</Button>
+                  { itemNum === 10 ?
+                  <Button variant="secondary" id="button-addon1" disabled>+</Button>
+                  :
+                  <Button variant="secondary" id="button-addon1" onClick={()=>setItemNum((num)=>num+1)}>+</Button>
+                  }
                 </InputGroup>
               </Col>
               <Col xs={12} sm={6} className="shopItem_content_price align-self-end">

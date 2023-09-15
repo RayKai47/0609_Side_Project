@@ -17,7 +17,7 @@ const Goods = (props) => {
                 className="shop_list-content-state goods_state"
                 data-goods-state={
                   good.state !== "" ? 
-                    good.state =="HOT" ? "hot": "new" 
+                    good.state === "HOT" ? "hot": "new" 
                   : ""
                 }
               >

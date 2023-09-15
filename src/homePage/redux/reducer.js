@@ -80,7 +80,7 @@ const updateOrder = (state, payload) => {
 
 const delOrder = (state,payload) => {
   let tempList = state.filter((good) => {
-    return good.id != payload.id || good.material != payload.material
+    return good.id !== payload.id || good.material !==payload.material
   })
   return ([...tempList])
 };
