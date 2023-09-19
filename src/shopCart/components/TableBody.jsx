@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Form, InputGroup} from 'react-bootstrap';
 import styled from 'styled-components';
@@ -47,6 +47,9 @@ const TableBody = () => {
     }
   }
 
+  // useEffect(()=>{
+  //   if
+  // },)
   return (
     <tbody>
       {cartList.map((good,idx)=>(

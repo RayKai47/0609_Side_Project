@@ -9,6 +9,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 // import styled from 'styled-components'
 import { ShoppingCart } from 'phosphor-react';
+import Footer from '../commonComponents/Footer';
 
 const Header = () => {
 
@@ -66,6 +67,7 @@ const Header = () => {
       </Navbar>
       <div className="module">
         <Outlet/>
+        <Footer/>
         <Link className="cart-fix" to="/shopCart">
           <ShoppingCart size={32}/>
           {cartList[0] ?

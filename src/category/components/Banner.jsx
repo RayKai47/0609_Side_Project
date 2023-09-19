@@ -4,7 +4,7 @@ import "../css/category.css";
 
 const Banner = ({name}) => {
   return (
-    <Container fluid className="p-0 category_banner">
+    <Container fluid className="m-0 category_banner">
       <Row className="category_banner_title">
         <Col sm={{offset:1}}>
           {/* <h2 className="text-light">{categoryName}</h2> */}

@@ -1,5 +1,5 @@
-import {React, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { React, useState} from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Container, Row, Col, Button, Form, InputGroup } from 'react-bootstrap';
 import './css/shopItem.css';
@@ -9,9 +9,12 @@ import goodsData from '../infra/store/goodsData';
 const ShopItem = () => {
   const [itemNum, setItemNum] = useState(1);
   const {id} = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+
   // 1.因為預設值是null,所以此值為空 (以換selectedGood用法)
   // const [selectGood, setSelectGood] = useState(null);
-  const selectedGood = goodsData.find(good => good.id === id);
+  const selectedGood = goodsData.find(good => good.id == id);
   // 3. useEffect在執行完第一次渲染之後，才會執行（抓到資料
   // 更動之後selectGood就會有值，再次渲染時則不為空了
   // useEffect(() => {
@@ -22,19 +25,17 @@ const ShopItem = () => {
   const [selectedType, setSelectedType] = useState(null);
 
   const handleSelected = (type) => {
-    if(selectedType === type){
+    if(selectedType == type){
       setSelectedType(null)
     } else {
       setSelectedType(type)
     };
   };
 
-  const dispatch = useDispatch()
-
-  const addOrder = (good, type) => {
-    selectedType == null ? 
+  const addOrder = (good, type, toPurchase) => {
+    if(selectedType == null) {
       alert("請選擇樣式")
-    :
+    } else {
       dispatch({
         type: "ADD_ORDER",
         payload:{
@@ -43,6 +44,11 @@ const ShopItem = () => {
           itemNum: itemNum,
         }
       })
+      alert("加入購物車成功！")
+      if(toPurchase){
+        navigate("/shopCart")
+      }
+    }
   }
 
   return (
@@ -87,7 +93,7 @@ const ShopItem = () => {
               <Col xs={12} sm={6} md={4} className="shopItem_content_num">
                 <h6>數量：</h6>
                 <InputGroup size="sm" className="mt-3">
-                  { itemNum === 1 ? 
+                  { itemNum == 1 ? 
                     <Button variant="secondary" id="button-addon2" disabled>-</Button>
                   : 
                     <Button variant="secondary" id="button-addon2" onClick={()=>setItemNum((num)=>num-1)}>-</Button>
@@ -97,7 +103,7 @@ const ShopItem = () => {
                     value={itemNum}
                     onChange={(e)=>(setItemNum(e.target.value))}
                   />
-                  { itemNum === 10 ?
+                  { itemNum == 10 ?
                   <Button variant="secondary" id="button-addon1" disabled>+</Button>
                   :
                   <Button variant="secondary" id="button-addon1" onClick={()=>setItemNum((num)=>num+1)}>+</Button>
@@ -109,14 +115,13 @@ const ShopItem = () => {
               </Col>
               <Col xs={12}>
                 <Row>
-                  <Col xs={2}>
+                  <Col className="text-end">
                     <Button size="sm" variant="outline-danger"><Heart size={24}/></Button>
-                  </Col>
-                  <Col xs={5}>
-                    <Button variant="outline-success" onClick={()=>addOrder(selectedGood, selectedType)}>加入購物車</Button>
-                  </Col>
-                  <Col xs={5}>
-                    <Button variant="outline-primary">直接購買</Button>
+                    <Button className="ms-3" variant="outline-success" onClick={()=>addOrder(selectedGood, selectedType)}>加入購物車</Button>
+                    {/* <Link to="/shopCart"> */}
+                      {/* <Button className="ms-3" variant="outline-primary" onClick={()=>addOrder(selectedGood, selectedType)} >直接購買</Button> */}
+                      <Button className="ms-3" variant="outline-primary" onClick={()=>addOrder(selectedGood, selectedType, true)} >直接購買</Button>
+                    {/* </Link> */}
                   </Col>
                 </Row>
               </Col>

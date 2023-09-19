@@ -17,12 +17,15 @@ const Msg = styled.p`
   margin-top: 150px;
   display: block;
 `
+const TableContainer = styled.div`
+  min-height: 60vh;
+`
 
 const ShopCart = () => {
   const cartList = useSelector((state)=>state.cart);
 
   return (
-      <Container>
+      <TableContainer className="container mt-5">
         {cartList[0] ?
           <Table striped bordered hover>
             <>
@@ -39,7 +42,7 @@ const ShopCart = () => {
         :
           <Msg className="fs-3 text-danger text-center">您尚未新增商品</Msg>
         }
-      </Container>
+      </TableContainer>
   )
 };
 
