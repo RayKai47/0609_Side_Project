@@ -15,7 +15,7 @@ const Footer = () => {
           <Col>
             <Row className="gy-2" xs={1}>
               <Col>
-                <h5>紳士文化</h5>
+                <h4>紳士文化</h4>
               </Col>
               <Col>
                 <h6>最新消息</h6>
@@ -28,7 +28,7 @@ const Footer = () => {
           <Col>
             <Row className="gy-2" xs={1}>
               <Col>
-                <h5>開始購物</h5>
+                <h4>開始購物</h4>
               </Col>
               <Col>
                 <Link className="text-light" to="/category/suit"><h6>套裝</h6></Link>
@@ -47,29 +47,29 @@ const Footer = () => {
           <Col>
             <Row className="gy-2" xs={1}>
               <Col>
-                <h5>會員專區</h5>
+                <h4>會員專區</h4>
               </Col>
               <Col>
-                <span>會員中心</span>
+                <h6>會員中心</h6>
               </Col>
               <Col>
-                <span>追蹤清單</span>
+                <h6>追蹤清單</h6>
               </Col>
               <Col>
-                <span>訂單系統</span>
+                <h6>訂單系統</h6>
               </Col>
             </Row>
           </Col>
           <Col>
             <Row className="gy-2" xs={1}>
               <Col>
-                <h5>聯絡我們</h5>
+                <h4>聯絡我們</h4>
               </Col>
               <Col>
-                <span>聯絡方式</span>
+                <h6>聯絡方式</h6>
               </Col>
               <Col>
-                <span>加入我們</span>
+                <h6>加入我們</h6>
               </Col>
             </Row>
           </Col>

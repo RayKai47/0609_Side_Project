@@ -33,12 +33,11 @@ const Header = () => {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Link className="nav-link" to="/">Home</Link>
-                <Link className="nav-link" to="/category/suit">Suit</Link>
-                <Link className="nav-link" to="/category/tshirt">T-shirt</Link>
-                <Link className="nav-link" to="/category/jacket">Jacket</Link>
-                <Link className="nav-link" to="/category/jeans">Jeans</Link>
-                <Link className="nav-link" to="/shopCart">購物車</Link>
+                <Link className="nav-link" to="/category/suit">套裝</Link>
+                <Link className="nav-link" to="/category/tshirt">T恤</Link>
+                <Link className="nav-link" to="/category/jacket">外套</Link>
+                <Link className="nav-link" to="/category/jeans">褲子</Link>
+                <Link className="nav-link" to="/memberCenter">會員中心</Link>
                 {/* <NavDropdown
                   title="Dropdown"
                 >
@@ -68,7 +67,7 @@ const Header = () => {
       <div className="module">
         <Outlet/>
         <Footer/>
-        <Link className="cart-fix" to="/shopCart">
+        <Link className="cart-fix" to="/memberCenter/shopCart">
           <ShoppingCart size={32}/>
           {cartList[0] ?
             <span className="cart-num">{totalNum}</span>

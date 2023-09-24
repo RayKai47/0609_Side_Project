@@ -51,6 +51,25 @@ const ShopItem = () => {
     }
   }
 
+  const toggleFavorite = (good, type) => {
+    if(selectedType == null){
+      alert("請選擇樣式，以便通知庫存是否到貨")
+    } else {
+      dispatch({
+        type: "TOGGLE_FAVORITE",
+        favoriteList:{
+          itemData: {
+            id: good.id,
+            img: good.img,
+            name: good.name,
+            price: good.price,
+            material: type,
+          }
+        }
+      })
+    }
+  }
+
   return (
     <Container className="shopItem">
       <Row>
@@ -93,21 +112,13 @@ const ShopItem = () => {
               <Col xs={12} sm={6} md={4} className="shopItem_content_num">
                 <h6>數量：</h6>
                 <InputGroup size="sm" className="mt-3">
-                  { itemNum == 1 ? 
-                    <Button variant="secondary" id="button-addon2" disabled>-</Button>
-                  : 
-                    <Button variant="secondary" id="button-addon2" onClick={()=>setItemNum((num)=>num-1)}>-</Button>
-                  }
+                  <Button variant="secondary" id="button-addon2" disabled={itemNum == 1} onClick={()=>setItemNum((num)=>num-1)}>-</Button>
                   <Form.Control
                     className="text-center"
                     value={itemNum}
                     onChange={(e)=>(setItemNum(e.target.value))}
                   />
-                  { itemNum == 10 ?
-                  <Button variant="secondary" id="button-addon1" disabled>+</Button>
-                  :
-                  <Button variant="secondary" id="button-addon1" onClick={()=>setItemNum((num)=>num+1)}>+</Button>
-                  }
+                  <Button variant="secondary" id="button-addon1" disabled={itemNum == 10} onClick={()=>setItemNum((num)=>num+1)}>+</Button>
                 </InputGroup>
               </Col>
               <Col xs={12} sm={6} className="shopItem_content_price align-self-end">
@@ -116,12 +127,9 @@ const ShopItem = () => {
               <Col xs={12}>
                 <Row>
                   <Col className="text-end">
-                    <Button size="sm" variant="outline-danger"><Heart size={24}/></Button>
+                    <Button size="sm" variant="outline-danger" onClick={()=>toggleFavorite(selectedGood, selectedType)}><Heart size={24}/></Button>
                     <Button className="ms-3" variant="outline-success" onClick={()=>addOrder(selectedGood, selectedType)}>加入購物車</Button>
-                    {/* <Link to="/shopCart"> */}
-                      {/* <Button className="ms-3" variant="outline-primary" onClick={()=>addOrder(selectedGood, selectedType)} >直接購買</Button> */}
-                      <Button className="ms-3" variant="outline-primary" onClick={()=>addOrder(selectedGood, selectedType, true)} >直接購買</Button>
-                    {/* </Link> */}
+                    <Button className="ms-3" variant="outline-primary" onClick={()=>addOrder(selectedGood, selectedType, true)} >直接購買</Button>
                   </Col>
                 </Row>
               </Col>

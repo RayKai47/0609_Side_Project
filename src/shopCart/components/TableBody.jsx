@@ -48,7 +48,9 @@ const TableBody = () => {
   }
 
   // useEffect(()=>{
-  //   if
+  //   if(cartList.itemNum >10 ){
+
+  //   }
   // },)
   return (
     <tbody>
@@ -70,7 +72,7 @@ const TableBody = () => {
           </td>
           <td>
             <InputGroup className="mb-3">
-              <Button variant="secondary" onClick={()=>handleUpdate(good,1)}>+</Button>
+              <Button variant="secondary" disabled={good.itemNum==10} onClick={()=>handleUpdate(good,1)}>+</Button>
               <Form.Control
                 className="text-center"
                 placeholder="商品數量"

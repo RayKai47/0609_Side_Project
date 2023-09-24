@@ -67,7 +67,7 @@ const updateOrder = (state, payload) => {
         // 商品數量為 0，不返回這個商品，相當於刪除
         return null;
       } else if(newQuantity === maxQuantity){
-        alert("商品數量最多10個！！")
+        // alert("商品數量最多10個！！")
       }
       return { ...good, itemNum: newQuantity };
     }
